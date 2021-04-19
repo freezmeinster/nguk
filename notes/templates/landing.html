@@ -1,0 +1,28 @@
+<html>
+   <head>
+	   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+   </head>
+   <body>
+	   <button onclick="reload()">Refresh Content</button>
+	   <div id="content"></div>
+	   <script>
+               function renderResult(data){
+	             res = "<ul>"
+		     data.forEach(function(i){
+			     res += "<li>" + i.title + "</li>" 
+		     })
+		     res += "</ul>"
+		     return res
+	       }
+	       function reload(){
+               $.ajax({
+		         url: "/api/notes/",
+		         success: function( result ) {
+				    console.log(result);
+				     $( "#content" ).html(renderResult(result));
+				   }
+	       });
+	       }
+	   </script>
+   </body>
+</html>
